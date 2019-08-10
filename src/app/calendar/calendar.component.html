@@ -1,0 +1,35 @@
+<div>
+  <p>
+    <i class="material-icons" (click)="addMonth(-1)">arrow_left</i>
+    <span>
+        {{ monthNames[(dateService.dateBehaviorSubject | async | date : "M")-1] }} {{ dateService.dateBehaviorSubject | async | date : "yyyy"}}
+      </span>
+    <i class="material-icons" (click)="addMonth(1)">arrow_right</i>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Пн</th>
+        <th>Вт</th>
+        <th>Ср</th>
+        <th>Чт</th>
+        <th>Пт</th>
+        <th>Сб</th>
+        <th>Вс</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="calendar.length">
+      <tr *ngFor="let weeks of calendar">
+        <td *ngFor="let day of weeks.days"
+            [class.disabled]="!day.inMonths"
+            (click)="selectDate(day.date)"
+            class="date-data">
+          <span [class.active]="day.isToday"
+                [class.selected]="day.selected">
+            {{ day.date | date : "dd" }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

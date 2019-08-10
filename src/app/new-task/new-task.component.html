@@ -1,0 +1,20 @@
+<div>
+  <strong>Новая задача:</strong>
+  <hr/>
+  <form novalidate (ngSubmit)="submit(task)" [formGroup]="task">
+    <ul>
+      <li>
+        <input type="text" placeholder="Задача" formControlName="title">
+        <span class="error" *ngIf="task.get('title').hasError('required') && task.get('title').touched"> Введите название задачи </span>
+        <span class="error" *ngIf="task.get('title').hasError('minlength') && task.get('title').touched"> Минимальная длина задачи 3 символа </span>
+      </li>
+      <li>
+        <input type="text" placeholder="Описание" formControlName="desc">
+        <span class="error" *ngIf="task.get('desc').hasError('required') && task.get('desc').touched"> Введите описание </span>
+      </li>
+      <li>
+        <button type="submit" [disabled]="task.invalid">Добавить</button>
+      </li>
+    </ul>
+  </form>
+</div>

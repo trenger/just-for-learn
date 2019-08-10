@@ -1,0 +1,15 @@
+<div>
+  <strong>Задачи на: {{ dateService.dateBehaviorSubject | async | date : "dd.MM.yyyy" }}</strong>
+  <hr/>
+  <ul *ngIf="taskService.tasks.length; else noTask">
+    <li *ngFor="let task of taskService.tasks; let i = index">
+      <input type="checkbox" [checked]="task.isdone" (click)="onClick(task.id)">
+      <span [class.done]="task.isdone">
+        {{ task.title }}
+      </span>
+      <button class="btn btn-primary">Удалить</button>
+    </li>
+  </ul>
+  <ng-template #noTask>Пусто</ng-template>
+  <app-new-task></app-new-task>
+</div>

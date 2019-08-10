@@ -1,0 +1,40 @@
+<section>
+  <header class="filter">
+    <button (click)="viewWorkerId()">Создать</button>
+    <input type="text" placeholder="Поиск..." [(ngModel)]="filterText">
+  </header>
+  <main *ngIf="!workerLoading">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Job</th>
+      </tr>
+      <tr *ngFor="let worker of workerService.workers | workersFilter:filterText"
+        (click)="select(worker)" [class.selected]="worker.selected">
+        <td>
+          <span>
+            {{worker.name}}
+          </span>
+        </td>
+        <td class="number-data">
+          <span>
+            {{worker.salary}}
+          </span>
+          </td>
+        <td>
+          <span>
+            {{worker.job}}
+          </span>
+        </td>
+        <button (click)="remove(worker.id)">Удалить</button>
+      </tr>
+    </table>
+  </main>
+  <p *ngIf="workerLoading">
+    Loading...
+  </p>
+  <footer>
+    <app-new-worker></app-new-worker>
+  </footer>
+</section>

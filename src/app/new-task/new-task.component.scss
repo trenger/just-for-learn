@@ -1,0 +1,18 @@
+div {
+  border: 1px solid #000000;
+  padding: 1rem;
+
+  input {
+    margin-right: .5rem;
+    width: 60%;
+  }
+
+  li {
+    justify-content: left;
+  }
+
+}
+
+.error {
+  color: red;
+}

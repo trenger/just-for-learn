@@ -1,0 +1,21 @@
+ul {
+
+  li {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+
+    span {
+      width: 100%;
+      text-align: left;
+      align-items: left;
+    }
+
+    input {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.done {
+  text-decoration: line-through;
+}

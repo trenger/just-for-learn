@@ -1,0 +1,26 @@
+<div>
+  <strong>Новый работник:</strong>
+  <hr/>
+  <form novalidate (ngSubmit)="submit(worker)" [formGroup]="worker">
+     <!--{{ workerBehaviorSubject.get('salary').errors | json }} -->
+    <ul>
+      <li>
+        <input type="text" placeholder="Name" formControlName="name">
+        <span class="error" *ngIf="worker.get('name').hasError('required') && worker.get('name').touched"> Введите имя </span>
+        <span class="error" *ngIf="worker.get('name').hasError('minlength') && worker.get('name').touched"> Минимальная длина имени 3 символа </span>
+      </li>
+      <li>
+        <input class="number-data" type="number" placeholder="Salary" formControlName="salary">
+        <span class="error" *ngIf="worker.get('salary').hasError('required') && worker.get('salary').touched"> Введите зарплату </span>
+        <span class="error" *ngIf="worker.get('salary').hasError('min') && worker.get('salary').touched"> Зарплата не может быть меньше 0 </span>
+      </li>
+      <li>
+        <input type="text" placeholder="Job" formControlName="job">
+        <span class="error" *ngIf="worker.get('job').hasError('required') && worker.get('job').touched"> Введите должность </span>
+      </li>
+      <li>
+        <button type="submit" [disabled]="worker.invalid">Добавить</button>
+      </li>
+    </ul>
+  </form>
+</div>

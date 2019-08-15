@@ -1,0 +1,8 @@
+.acttask {
+  display: flex;
+  flex-direction: column;
+}
+
+.acttask > * {
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title align="center">{{ title }}</h2>
+<hr/>
+<mat-dialog-content class="acttask" [formGroup]="form">
+  <mat-form-field>
+    <input type="text"  matInput placeholder="Title" minlength="3" formControlName="title" required>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Descrioption" formControlName="desc" required></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]>Отмена</button>
+  <button mat-raised-button [disabled]="form.invalid" [mat-dialog-close]="form.value">Сохранить</button>
+</div>

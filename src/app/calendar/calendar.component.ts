@@ -41,33 +41,33 @@ export class CalendarComponent implements OnInit {
   }
 
   generateCalendar(day: Date) {
-    const rebuild: boolean = (!this.dateService.prevActiveDate)
+    const rebuild: boolean = (!this.dateService.prevActiveDate);
 
     if ((!rebuild)
         && day.getMonth() == this.dateService.prevActiveDate.getMonth()
         && day.getFullYear() == this.dateService.prevActiveDate.getFullYear()) {
-      this.dateService.prevActiveDate.setHours(0,0,0,0)
-      this.changeSelected(this.dateService.prevActiveDate)
+      this.dateService.prevActiveDate.setHours(0,0,0,0);
+      this.changeSelected(this.dateService.prevActiveDate);
       this.changeSelected(day)
     } else {
-      const calendar: Week[] = []
-      var today: Date = new Date()
-      today.setHours(0,0,0,0)
-      day.setHours(0,0,0,0)
-      var days: Day[] = [];
-      var firstday: Date = this.getFirstDateOfMonth(day);
+      const calendar: Week[] = [];
+      const today: Date = new Date();
+      today.setHours(0,0,0,0);
+      day.setHours(0,0,0,0);
+      let days: Day[] = [];
+      let firstday: Date = this.getFirstDateOfMonth(day);
       firstday = this.addDays(firstday, -(firstday.getDay() == 0 ? 7 : firstday.getDay()));
-      var lastday: Date = this.getLastDateOfMonth(day);
+      let lastday: Date = this.getLastDateOfMonth(day);
       lastday = this.addDays(lastday, 7-lastday.getDay());
-      var d: Date = new Date(firstday);
+      let d: Date = new Date(firstday);
       while (d.getTime() !== lastday.getTime()) {
         for (let i = 1; i <= 7; i++) {
-          d = this.addDays(d, 1)
-          days.push({date: d, inMonths: d.getMonth() == day.getMonth() ? true : false,
+          d = this.addDays(d, 1);
+          days.push({date: d, inMonths: d.getMonth() == day.getMonth(),
             isToday: d.getTime() == today.getTime(),
             selected: d.getTime() == day.getTime()})
         }
-        calendar.push({days})
+        calendar.push({days});
         days = []
       }
       this.calendar = calendar
@@ -92,25 +92,26 @@ export class CalendarComponent implements OnInit {
   }
 
   getLastDateOfMonth(day: Date): Date {
-    const d: Date = new Date(day.getFullYear(), day.getMonth()+1, 1)
-    d.setDate(d.getDate()-1)
+    const d: Date = new Date(day.getFullYear(), day.getMonth()+1, 1);
+    d.setDate(d.getDate()-1);
     return d
   }
 
   changeSelected(date: Date): void {
     function getWeek(date: Date): number {
-      const day: number = date.getDate() - date.getDay() + 1
-      var week: number = 0
+      const day: number = date.getDate() - date.getDay() + 1;
+      let week: number = 0;
       while (day > week*7 + 1) {
         week++
       }
       return week
     }
-    var weekNum: number = getWeek(date)
+
+    const weekNum: number = getWeek(date);
 
     for (let i = 0; i < this.calendar[weekNum].days.length; i++) {
       if (this.calendar[weekNum].days[i].date.getTime() == date.getTime()) {
-        this.calendar[weekNum].days[i].selected = !this.calendar[weekNum].days[i].selected
+        this.calendar[weekNum].days[i].selected = !this.calendar[weekNum].days[i].selected;
         break
       }
     }

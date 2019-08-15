@@ -1,40 +1,31 @@
 <section>
   <header class="filter">
-    <button (click)="viewWorkerId()">Создать</button>
-    <input type="text" placeholder="Поиск..." [(ngModel)]="filterText">
+    <span>
+      <i class="material-icons md-36" title="Добавить работника" (click)="newWorker()">person_add</i>
+    </span>
+    <input type="search" placeholder="Поиск..." [(ngModel)]="filterText">
   </header>
   <main *ngIf="!workerLoading">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Salary</th>
-        <th>Job</th>
-      </tr>
-      <tr *ngFor="let worker of workerService.workers | workersFilter:filterText"
-        (click)="select(worker)" [class.selected]="worker.selected">
-        <td>
-          <span>
-            {{worker.name}}
-          </span>
-        </td>
-        <td class="number-data">
-          <span>
-            {{worker.salary}}
-          </span>
-          </td>
-        <td>
-          <span>
-            {{worker.job}}
-          </span>
-        </td>
-        <button (click)="remove(worker.id)">Удалить</button>
-      </tr>
-    </table>
+    <ul *ngIf="workerService.workers.length; else noWorkers">
+      <li class="title">
+        <span><strong>Name</strong></span>
+        <span><strong>Salary</strong></span>
+        <span><strong>Job</strong></span>
+      </li>
+      <li *ngFor="let worker of workerService.workers | workersFilter:filterText"
+        [class.selected]="worker.selected"
+        (click)="select(worker)">
+        <span>{{ worker.name }}</span>
+        <span class="number-data">{{ worker.salary }}</span>
+        <span>{{ worker.job }}</span>
+        <i class="material-icons" title="Добавить задачу" (click)="newTask()">add</i>
+        <i class="material-icons" title="Редактировать" (click)="change(worker)">edit</i>
+        <i class="material-icons" title="Удалить" (click)="remove(worker.id)">delete_forever</i>
+      </li>
+    </ul>
+    <ng-template #noWorkers>Пусто</ng-template>
   </main>
   <p *ngIf="workerLoading">
     Loading...
   </p>
-  <footer>
-    <app-new-worker></app-new-worker>
-  </footer>
 </section>

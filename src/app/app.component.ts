@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Some organizer';
-  static dburl = 'https://some-organizer.firebaseio.com/'
+  title = 'Раздача заданий работникам';
+  static dburl = 'https://some-organizer.firebaseio.com/';
   constructor() {
     }
 }

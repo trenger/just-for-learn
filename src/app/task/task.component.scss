@@ -13,6 +13,11 @@ ul {
     input {
       margin-right: 1rem;
     }
+
+    &:hover:not(.title) {
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
   }
 }
 

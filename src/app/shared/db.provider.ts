@@ -1,8 +1,8 @@
-import {ErrorHandler, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 
 export interface Resp {
   name: string
@@ -48,7 +48,11 @@ export class DbProvider{
       .pipe(catchError(this.handleError))
   }
 
-  update() {
+  update<T>(id: string, data: T, url: string): Observable<T> {
+    return this.http.put<T>(`${url}/${id}.json`, this.getJSONstring(data)).pipe(catchError(this.handleError))
+  }
 
+  getJSONstring<T>(t: T) {
+    return JSON.stringify(t, (key, value) => (key == 'id' ? undefined : value))
   }
 }

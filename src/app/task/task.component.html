@@ -2,14 +2,14 @@
   <strong>Задачи на: {{ dateService.dateBehaviorSubject | async | date : "dd.MM.yyyy" }}</strong>
   <hr/>
   <ul *ngIf="taskService.tasks.length; else noTask">
-    <li *ngFor="let task of taskService.tasks; let i = index">
-      <input type="checkbox" [checked]="task.isdone" (click)="onClick(task.id)">
+    <li *ngFor="let task of taskService.tasks">
+      <input type="checkbox" title="Завершить" [checked]="task.isdone" (click)="onCheck(task)">
       <span [class.done]="task.isdone">
         {{ task.title }}
       </span>
-      <button class="btn btn-primary">Удалить</button>
+      <i class="material-icons" title="Редактирвать" (click)="update(task)">edit</i>
+      <i class="material-icons" title="Удалить" (click)="delete(task.id)">delete_forever</i>
     </li>
   </ul>
   <ng-template #noTask>Пусто</ng-template>
-  <app-new-task></app-new-task>
 </div>

@@ -11,18 +11,18 @@ export interface Task {
   title: string
   desc: string
   owner: string
-  workers?: string[]
   date: Date
   isdone: boolean
 }
 
 @Injectable({providedIn: 'root'})
 export class TaskService {
-  static url = AppComponent.dburl + 'tasks'
-  public tasks: Task[] = []
-  public tasksByDate: Task[] = []
+  static url = AppComponent.dburl + 'tasks/';
+  public tasks: Task[] = [];
+  public tasksByDate: Task[] = [];
 
-  constructor(private dateService: DateService, private db: DbProvider) {}
+  constructor(private dateService: DateService, private db: DbProvider) {
+  }
 
   changeState(id: string) {
     const idx = this.tasks.findIndex(task => task.id === id);
@@ -31,10 +31,25 @@ export class TaskService {
 
   load(date: Date): Observable<Task[]> {
     return this.db
-      .read(TaskService.url+'/'+formatDate(date, "dd-MM-yyyy", "en-En"))
+      .read(TaskService.url + formatDate(date, "dd-MM-yyyy", "en-En"))
   }
 
   create(task: Task): Observable<Task> {
-    return this.db.create(task, TaskService.url+'/'+formatDate(this.dateService.dateBehaviorSubject.value, "dd-MM-yyyy", "en-En"))
+    return this.db.create(task, TaskService.url + formatDate(this.dateService.dateBehaviorSubject.value, "dd-MM-yyyy", "en-En"))
+  }
+
+  update(task: Task): Observable<Task> {
+    return this.db.update(task.id, task, TaskService.url + formatDate(this.dateService.dateBehaviorSubject.value, "dd-MM-yyyy", "en-En"))
+  }
+
+  delete(id: string): void {
+    this.db.delete(id, TaskService.url + formatDate(this.dateService.dateBehaviorSubject.value, "dd-MM-yyyy", "en-En"))
+      .subscribe(() => {
+        },
+        err => console.log('error', err),
+        () => {
+          this.tasks = this.tasks.filter(value => value.id !== id);
+          this.tasksByDate = this.tasksByDate.filter(value => value.id !== id)
+        })
   }
 }

@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { WorkersComponent } from './workers/workers.component';
+import { WorkersComponent} from './workers/workers.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TaskComponent } from './task/task.component';
 import { registerLocaleData } from '@angular/common';
 import localeRU from '@angular/common/locales/ru';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { NewWorkerComponent } from './new-worker/new-worker.component';
-import { DialogComponent } from './dialog/dialog.component';
 import { WorkersFilterPipe } from './shared/workers.filter.pipe';
-import { NewTaskComponent } from './new-task/new-task.component';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ConfirmDialog} from './shared/dialog/confirm.dialog';
+import {ActionWorkerDialog} from './shared/dialog/action-worker.dialog';
+import {ActionTaskDialog} from './shared/dialog/action-task.dialog';
 
 
-registerLocaleData(localeRU)
+registerLocaleData(localeRU);
 
 @NgModule({
   declarations: [
@@ -24,20 +25,31 @@ registerLocaleData(localeRU)
     WorkersComponent,
     CalendarComponent,
     TaskComponent,
-    NewWorkerComponent,
-    DialogComponent,
     WorkersFilterPipe,
-    NewTaskComponent
+    ConfirmDialog,
+    ActionWorkerDialog,
+    ActionTaskDialog
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "ru-RU" }, //replace "en-US" with your locale
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmDialog,
+    ActionWorkerDialog,
+    ActionTaskDialog
+  ]
 })
 export class AppModule {}

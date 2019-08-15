@@ -2,7 +2,7 @@
   <p>
     <i class="material-icons" (click)="addMonth(-1)">arrow_left</i>
     <span>
-        {{ monthNames[(dateService.dateBehaviorSubject | async | date : "M")-1] }} {{ dateService.dateBehaviorSubject | async | date : "yyyy"}}
+        {{ monthNames[( dateService.dateBehaviorSubject | async | date : "M")-1] }} {{ dateService.dateBehaviorSubject | async | date : "yyyy"}}
       </span>
     <i class="material-icons" (click)="addMonth(1)">arrow_right</i>
   </p>
@@ -23,11 +23,10 @@
         <td *ngFor="let day of weeks.days"
             [class.disabled]="!day.inMonths"
             (click)="selectDate(day.date)"
-            class="date-data">
-          <span [class.active]="day.isToday"
-                [class.selected]="day.selected">
+            class="date-data"
+            [class.active]="day.isToday"
+            [class.selected]="day.selected && !day.isToday">
             {{ day.date | date : "dd" }}
-          </span>
         </td>
       </tr>
     </tbody>

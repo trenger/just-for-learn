@@ -1,0 +1,30 @@
+<mat-toolbar>Данные работника</mat-toolbar>
+<mat-list *ngIf="worker$ | async as worker">
+  <mat-list-item>
+    <span>Surname:</span>
+    <span><strong>{{ worker.surname }}</strong></span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span>Name:</span>
+    <span><strong>{{ worker.name }}</strong></span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span>Job:</span>
+    <span><strong>{{ worker.job }}</strong></span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span>Salary:</span>
+    <span><strong>{{ worker.salary }}</strong></span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-action-list>
+    <button mat-list-item (click)="back()">Назад</button>
+  </mat-action-list>
+</mat-list>
+
+
+
+

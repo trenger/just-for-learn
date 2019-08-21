@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Раздача заданий работникам';
-  static dburl = 'https://some-organizer.firebaseio.com/';
+  title = 'Управление рабочим процессом';
+  menus: string[] = ['Мониторинг рабочего процесса', 'Управление работниками'];
+
   constructor() {
-    }
+  }
 }

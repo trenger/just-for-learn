@@ -1,18 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>
-  {{ title }}!
-</h1>
-<hr/>
-<div class="container">
-  <div class="workers">
-    <app-workers></app-workers>
-  </div>
-  <div class="organizer">
-    <header>
-      <app-calendar></app-calendar>
-    </header>
-    <main>
-      <app-task></app-task>
-    </main>
-  </div>
+<mat-toolbar class="main-toolbar" color="primary">
+  <span routerLink="main">{{ title }}</span>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button [matMenuTriggerFor]="main">Menu</button>
+  <mat-menu #main="matMenu">
+    <button mat-menu-item routerLink="main">
+      <span>{{ menus[0] }}</span>
+    </button>
+    <button mat-menu-item routerLink="workers">
+      <span>{{ menus[1] }}</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<div>
+  <router-outlet></router-outlet>
 </div>
+

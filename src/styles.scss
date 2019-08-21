@@ -1,14 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-.string-data {
-  text-align: left;
-}
-
-.number-data {
-  text-align: right;
-}
-
-.date-data {
-  text-align: center;
+.fill-remaining-space {
+  flex: 1 1 auto;
 }
 
 ul {
@@ -25,3 +17,10 @@ ul {
     justify-content: space-between;
   }
 }
+
+mat-form-field {
+  width: 100%;
+}
+
+
+

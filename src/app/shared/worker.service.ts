@@ -1,49 +1,45 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DbProvider} from './db.provider';
-import {AppComponent} from '../app.component';
+import {environment} from '../../environments/environment';
 
 export interface Worker {
-  id?: string
-  name: string
-  salary: number
-  job: string
-  selected?: boolean
+  id?: string;
+  surname: string;
+  name: string;
+  job: string;
+  salary: number;
+  selected?: boolean;
 }
 
 @Injectable({providedIn: 'root'})
-export class WorkerService{
-  public workerBehaviorSubject: BehaviorSubject<Worker> = new BehaviorSubject<Worker>(null);
-  static url = AppComponent.dburl + 'workers';
-  public workers: Worker[] = [];
+export class WorkerService {
 
   constructor(private db: DbProvider) {
   }
+  static url = environment.dbUrl + 'workers';
+  public workerBehaviorSubject: BehaviorSubject<Worker> = new BehaviorSubject<Worker>(null);
 
   load(): Observable<Worker[]> {
-    return this.db.read(WorkerService.url)
+    return this.db.read(WorkerService.url);
   }
 
-  create(worker: Worker): Observable<Worker>{
-    return this.db.create(worker, WorkerService.url)
+  create(worker: Worker): Observable<Worker> {
+    return this.db.create(worker, WorkerService.url);
   }
 
   update(worker: Worker): Observable<Worker> {
-    return this.db.update(worker.id, worker, WorkerService.url)
+    return this.db.update(worker.id, worker, WorkerService.url);
   }
 
-  remove(id: string): void {
-    this.db.delete(id, WorkerService.url)
-      .subscribe(() =>  {},
-        err => console.log('error', err),
-        () => {this.workers = this.workers.filter(worker => worker.id !== id)
-        })
+  remove(id: string): Observable<{}> {
+    return this.db.delete(id, WorkerService.url);
   }
 
   filterWorker(search: string) {
   }
 
-  changeWorker(worker: Worker) {
-    this.workerBehaviorSubject.next(worker)
+  selectWorker(worker: Worker) {
+    this.workerBehaviorSubject.next(worker);
   }
 }

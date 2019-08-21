@@ -7,13 +7,15 @@ export class DateService {
   public prevActiveDate: Date;
 
   changeMonth(dir: number) {
-    const value = new Date(this.dateBehaviorSubject.value.getFullYear(), this.dateBehaviorSubject.value.getMonth()+dir, this.dateBehaviorSubject.value.getDate());
+    const value = new Date(this.dateBehaviorSubject.value.getFullYear(),
+      this.dateBehaviorSubject.value.getMonth() + dir,
+      this.dateBehaviorSubject.value.getDate());
     this.prevActiveDate = this.dateBehaviorSubject.value;
-    this.dateBehaviorSubject.next(value)
+    this.dateBehaviorSubject.next(value);
   }
 
   changeDate(date: Date) {
     this.prevActiveDate = this.dateBehaviorSubject.value;
-    this.dateBehaviorSubject.next(date)
+    this.dateBehaviorSubject.next(date);
   }
 }

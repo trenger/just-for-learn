@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.workers {
+  width: 70%;
+  margin: .5rem;
+}
+
+.organizer {
+  width: 30%;
+  margin: .5rem;
+  justify-content: space-between;
+}

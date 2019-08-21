@@ -1,3 +1,4 @@
+<mat-toolbar>Управление работниками</mat-toolbar>
 <section>
   <header class="filter">
     <span>
@@ -6,19 +7,22 @@
     <input type="search" placeholder="Поиск..." [(ngModel)]="filterText">
   </header>
   <main *ngIf="!workerLoading">
-    <ul *ngIf="workerService.workers.length; else noWorkers">
+    <ul *ngIf="workers.length; else noWorkers">
       <li class="title">
+        <span><strong>Surname</strong></span>
         <span><strong>Name</strong></span>
-        <span><strong>Salary</strong></span>
         <span><strong>Job</strong></span>
       </li>
-      <li *ngFor="let worker of workerService.workers | workersFilter:filterText"
+      <li *ngFor="let worker of workers | workersFilter:filterText"
         [class.selected]="worker.selected"
         (click)="select(worker)">
+        <span>{{ worker.surname }}</span>
         <span>{{ worker.name }}</span>
-        <span class="number-data">{{ worker.salary }}</span>
         <span>{{ worker.job }}</span>
         <i class="material-icons" title="Добавить задачу" (click)="newTask()">add</i>
+        <a [routerLink]="['/workers', worker.id]">
+          <i class="material-icons" title="Данные работника">remove_red_eye</i>
+        </a>
         <i class="material-icons" title="Редактировать" (click)="change(worker)">edit</i>
         <i class="material-icons" title="Удалить" (click)="remove(worker.id)">delete_forever</i>
       </li>
@@ -26,6 +30,6 @@
     <ng-template #noWorkers>Пусто</ng-template>
   </main>
   <p *ngIf="workerLoading">
-    Loading...
+    <app-spinner></app-spinner>
   </p>
 </section>
